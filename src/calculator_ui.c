@@ -1,4 +1,22 @@
 #include "calculator_ui.h"
+#include <stdio.h>
+
+void on_number_clicked(GtkButton *button, gpointer user_data)
+{
+    GtkEditable *display = GTK_EDITABLE(user_data);
+    printf("Hello There!!!\n");
+
+    char *text = gtk_button_get_label(button);
+    int position = gtk_editable_get_position(display);
+
+    gtk_editable_insert_text(
+        display,
+        text,
+        -1,
+        &position);
+
+    gtk_editable_set_position(display, position);
+}
 
 void calculator_activate(GtkApplication *app, gpointer user_data)
 {
@@ -81,9 +99,18 @@ void calculator_activate(GtkApplication *app, gpointer user_data)
         gtk_widget_set_vexpand(widgets[i], TRUE);
     }
 
-    GtkWidget *layout = gtk_box_new(GTK_ORIENTATION_VERTICAL, 5);
-
     GtkWidget *display = gtk_entry_new();
+
+    for (size_t i = 0; i < widgets_count; i++)
+    {
+        g_signal_connect(
+            widgets[i],
+            "clicked",
+            G_CALLBACK(on_number_clicked),
+            display);
+    }
+
+    GtkWidget *layout = gtk_box_new(GTK_ORIENTATION_VERTICAL, 5);
 
     gtk_widget_set_vexpand(display, TRUE);
     gtk_widget_set_hexpand(display, TRUE);
