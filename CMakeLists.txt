@@ -9,7 +9,15 @@ project(
 set(CMAKE_C_STANDARD 17)
 set(CMAKE_C_STANDARD_REQUIRED ON)
 set(CMAKE_C_EXTENSIONS OFF)
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
+find_package(PkgConfig REQUIRED)
+pkg_check_modules(
+    GTK4
+    REQUIRED
+    IMPORTED_TARGET
+    gtk4
+)
 
 file(GLOB SRC_FILES "src/*.c")
 add_executable(
@@ -28,4 +36,10 @@ target_compile_options(
   -Wall
   -Wextra
   -Wpedantic
+)
+
+target_link_libraries(
+    calculator
+    PRIVATE
+    PkgConfig::GTK4
 )
