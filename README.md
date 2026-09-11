@@ -1,5 +1,48 @@
 # Calculator
 
+## Ubuntu Installation
+
+On Ubuntu, GTK4 can be installed directly using `apt`.
+
+### Prerequisites
+
+Install the C/C++ build tools, CMake, `pkg-config`, and the GTK4 development package:
+
+```bash
+sudo apt update
+
+sudo apt install \
+    build-essential \
+    cmake \
+    pkg-config \
+    libgtk-4-dev
+```
+
+### Verify GTK4 Installation
+
+Check that GTK4 is available through `pkg-config`:
+
+```bash
+pkg-config --modversion gtk4
+```
+
+You can also verify that the compiler and CMake are installed:
+
+```bash
+gcc --version
+cmake --version
+```
+
+### Build and Run
+
+From the project root:
+
+```bash
+cmake -S . -B build
+cmake --build build
+./build/calculator
+```
+
 ## Windows Installation
 
 On Windows ensure to install gtk4 from https://github.com/wingtk/gvsbuild.
