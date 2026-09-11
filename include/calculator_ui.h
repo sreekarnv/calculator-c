@@ -3,6 +3,7 @@
 #include <gtk/gtk.h>
 #include <stdio.h>
 #include <stdbool.h>
+#include <stdlib.h>
 
 void on_number_clicked(GtkButton *button, gpointer user_data);
 
@@ -12,4 +13,4 @@ void on_equals_clicked(GtkButton *button, gpointer user_data);
 
 void on_clear_clicked(GtkButton *button, gpointer user_data);
 
-bool validate_expression(char *expr, double *result);
+bool evaluate_expression(char *expr, double *result);

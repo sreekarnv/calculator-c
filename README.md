@@ -24,7 +24,7 @@ choco install uv
 choco install visualstudio2022-workload-vctools 
 ```
 
-#### Install GTK4
+### Install GTK4
 
 ```bash
 # Clone the Repository and Setup env
@@ -36,4 +36,4 @@ uv tool install gvsbuild
 uv run gvsbuild build gtk4
 ```
 
-Once installation is done add C:\gtk-build\gtk\x64\release\bin to PATH. Check out instructions on how to use this with Visual Studio [here](https://github.com/wingtk/gvsbuild#using-gtk-with-visual-studio).
+Once installation is done add `C:\gtk-build\gtk\x64\release\bin` to PATH. Check out instructions on how to use this with Visual Studio [here](https://github.com/wingtk/gvsbuild#using-gtk-with-visual-studio).

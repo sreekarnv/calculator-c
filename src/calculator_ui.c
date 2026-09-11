@@ -159,89 +159,6 @@ void calculator_activate(GtkApplication *app, gpointer user_data)
     gtk_window_present(GTK_WINDOW(window));
 }
 
-bool evaluate_expression(char *expr, double *result)
-{
-    if (expr == NULL)
-        return false;
-
-    char *first = malloc(6);
-    char *end = malloc(6);
-    char operator;
-
-    size_t i = 0;
-    while (true)
-    {
-        if (expr[i] == '+' || expr[i] == '-' || expr[i] == '*' || expr[i] == '/' || expr[i] == '%' || expr[i] == '\0')
-        {
-            operator = expr[i];
-            break;
-        }
-
-        first[i] = expr[i];
-        i++;
-    }
-    first[i] = '\0';
-
-    i += 1;
-    int j = 0;
-    while (expr[i] != '\0')
-    {
-        end[j] = expr[i];
-        i++;
-        j++;
-    }
-    end[j] = '\0';
-
-    char *endf;
-    char *ende;
-
-    int numbers[] = {strtod(first, &endf), strtod(end, &ende)};
-
-    if (operator == '+')
-    {
-        int int_result;
-        add(numbers, 2, &int_result);
-        *result = int_result;
-
-        printf("Addition = %d\n", int_result);
-    }
-    else if (operator == '-')
-    {
-        int int_result;
-        subtract(numbers, 2, &int_result);
-        *result = int_result;
-
-        printf("Subtraction = %d\n", int_result);
-    }
-    else if (operator == '*')
-    {
-        int int_result;
-        multiply(numbers, 2, &int_result);
-        *result = int_result;
-
-        printf("Multiply = %d\n", int_result);
-    }
-    else if (operator == '/')
-    {
-        divide(numbers, 2, result);
-
-        printf("Division = %.2lf\n", *result);
-    }
-    else if (operator == '%')
-    {
-        int int_result;
-        modulus(numbers, 2, &int_result);
-        *result = int_result;
-
-        printf("Modulus = %d\n", int_result);
-    }
-
-    free(first);
-    free(end);
-
-    return true;
-}
-
 void on_equals_clicked(GtkButton *button, gpointer user_data)
 {
     (void)button;
@@ -268,6 +185,10 @@ void on_equals_clicked(GtkButton *button, gpointer user_data)
     gtk_editable_set_text(
         display,
         buffer);
+
+    gtk_editable_set_position(
+        display,
+        -1);
 }
 
 void on_clear_clicked(GtkButton *button, gpointer user_data)

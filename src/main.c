@@ -1,4 +1,3 @@
-#include <stdio.h>
 #include "calculator_expr.h"
 #include "calculator_ui.h"
 
