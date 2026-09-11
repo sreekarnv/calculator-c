@@ -9,13 +9,12 @@ On Windows ensure to install gtk4 from https://github.com/wingtk/gvsbuild.
 1. [Chocolatey](https://chocolatey.org/)
 2. [MSYS](https://www.msys2.org/)
 3. [UV](https://docs.astral.sh/uv/)
-4. Visual Studio Build Tools
+4. [Visual Studio Build Tools](https://visualstudio.microsoft.com/downloads/?q=build+tools)
 
 #### Install Prerequistes
 
 ```bash
-# Install Prerequistes
-
+# Install MSYS
 choco install msys2
 
 # Run cmd (or) powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
