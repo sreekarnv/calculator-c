@@ -159,7 +159,7 @@ void calculator_activate(GtkApplication *app, gpointer user_data)
     gtk_window_present(GTK_WINDOW(window));
 }
 
-bool validate_expression(char *expr, double *result)
+bool evaluate_expression(char *expr, double *result)
 {
     if (expr == NULL)
         return false;
@@ -180,6 +180,7 @@ bool validate_expression(char *expr, double *result)
         first[i] = expr[i];
         i++;
     }
+    first[i] = '\0';
 
     i += 1;
     int j = 0;
@@ -189,6 +190,7 @@ bool validate_expression(char *expr, double *result)
         i++;
         j++;
     }
+    end[j] = '\0';
 
     char *endf;
     char *ende;
@@ -234,6 +236,9 @@ bool validate_expression(char *expr, double *result)
         printf("Modulus = %d\n", int_result);
     }
 
+    free(first);
+    free(end);
+
     return true;
 }
 
@@ -248,7 +253,7 @@ void on_equals_clicked(GtkButton *button, gpointer user_data)
 
     double result;
 
-    validate_expression(
+    evaluate_expression(
         (char *)expression,
         &result);
 
