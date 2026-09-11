@@ -30,13 +30,21 @@ target_include_directories(
   ${CMAKE_CURRENT_SOURCE_DIR}/include
 )
 
-target_compile_options(
-  calculator
-  PRIVATE
-  -Wall
-  -Wextra
-  -Wpedantic
-)
+if (MSVC)
+  target_compile_options(
+    calculator
+    PRIVATE
+    /W4
+  )
+else()
+  target_compile_options(
+    calculator
+    PRIVATE
+    -Wall
+    -Wextra
+    -Wpedantic
+  )
+endif()
 
 target_link_libraries(
     calculator
