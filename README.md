@@ -1,5 +1,15 @@
 # Calculator
 
+This is a small calculator project I built while learning C.
+
+It helped me practice:
+
+* Pointers, strings, and functions
+* Organizing code across multiple source and header files
+* CMake
+* Building a cross-platform GUI with GTK4
+* Basic expression parsing with operator precedence
+
 ## Ubuntu Installation
 
 On Ubuntu, GTK4 can be installed directly using `apt`.
