@@ -1,46 +1,84 @@
 #include "calculator_expr.h"
 
-bool evaluate_expression(char *expr, double *result)
+
+bool parse_term(const char** current, double* result)
 {
-    if (expr == NULL)
-        return false;
+    char* end;
 
-    char *current = expr;
-    double result_ = strtod(expr, &current);
+    double value = strtod(*current, &end);
+    *current = end;
 
-    while (*current != '\0')
+    while (
+        **current == '*' ||
+        **current == '/' ||
+        **current == '%')
     {
-        char operator = *current;
-        current++;
+        char operator = **current;
 
-        double number = strtod(current, &current);
+        (*current)++;
 
-        if (operator == '+')
+        double number = strtod(*current, &end);
+        *current = end;
+
+        if (operator == '*')
         {
-            result_ += number;
-        }
-        else if (operator == '-')
-        {
-            result_ -= number;
-        }
-        else if (operator == '*')
-        {
-            result_ *= number;
+            value *= number;
         }
         else if (operator == '/')
         {
-            result_ /= number;
+            value /= number;
         }
         else if (operator == '%')
         {
-            int left = (int)result_;
-            int right = (int)number;
-
-            result_ = left % right;
+            value = (int)value % (int)number;
         }
     }
 
-    *result = result_;
+    *result = value;
 
     return true;
+}
+
+bool parse_expression(const char** current, double* result)
+{
+    double value;
+
+    parse_term(current, &value);
+
+    while (
+        **current == '+' ||
+        **current == '-')
+    {
+        char operator = **current;
+
+        (*current)++;
+
+        double next_term;
+
+        // parse the ENTIRE next term, not merely one number.
+        parse_term(current, &next_term);
+
+        if (operator == '+')
+        {
+            value += next_term;
+        }
+        else if (operator == '-')
+        {
+            value -= next_term;
+        }
+    }
+
+    *result = value;
+
+    return true;
+}
+
+bool evaluate_expression(const char* expr, double* result)
+{
+    if (expr == NULL || result == NULL)
+        return false;
+
+    const char* current = expr;
+
+    return parse_expression(&current, result);
 }
