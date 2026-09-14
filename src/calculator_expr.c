@@ -1,9 +1,8 @@
 #include "calculator_expr.h"
 
-
-bool parse_term(const char** current, double* result)
+bool parse_term(const char **current, double *result)
 {
-    char* end;
+    char *end;
 
     double value = strtod(*current, &end);
     *current = end;
@@ -39,7 +38,7 @@ bool parse_term(const char** current, double* result)
     return true;
 }
 
-bool parse_expression(const char** current, double* result)
+bool parse_expression(const char **current, double *result)
 {
     double value;
 
@@ -73,12 +72,12 @@ bool parse_expression(const char** current, double* result)
     return true;
 }
 
-bool evaluate_expression(const char* expr, double* result)
+bool evaluate_expression(const char *expr, double *result)
 {
     if (expr == NULL || result == NULL)
         return false;
 
-    const char* current = expr;
+    const char *current = expr;
 
     return parse_expression(&current, result);
 }

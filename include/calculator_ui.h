@@ -12,5 +12,3 @@ void calculator_activate(GtkApplication *app, gpointer user_data);
 void on_equals_clicked(GtkButton *button, gpointer user_data);
 
 void on_clear_clicked(GtkButton *button, gpointer user_data);
-
-bool evaluate_expression(char *expr, double *result);
